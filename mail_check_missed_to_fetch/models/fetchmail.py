@@ -1,7 +1,7 @@
 import arrow
 from odoo import _, api, fields, models, SUPERUSER_ID
 from odoo.exceptions import UserError, RedirectWarning, ValidationError
-from email.Utils import formatdate
+from email.utils import formatdate
 
 class FetchMailServer(models.Model):
     _inherit = 'fetchmail.server'

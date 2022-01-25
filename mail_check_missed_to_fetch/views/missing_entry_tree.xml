@@ -4,9 +4,10 @@
 			<field name="model">mail.missed.fetch</field>
 			<field name="arch" type="xml">
 				<tree default_order="" string="" >
+					<field name="mail_message_id"/>
 					<field name="subject" />
-					<field name="sent" />
-					<field name="missed_ok" />
+					<field name="date" />
+					<field name="missing_ok" />
 				</tree>
 			</field>
 		</record>

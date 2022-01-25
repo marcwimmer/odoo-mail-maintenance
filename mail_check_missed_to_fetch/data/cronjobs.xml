@@ -4,7 +4,7 @@
 			<field name="name">check_missed_mails</field>
 			<field name="interval_number">1</field>
 			<field name="interval_type">days</field>
-			<field name="model_id" ref="fetchmail.server" />
+			<field name="model_id" ref="model_fetchmail_server" />
 			<field name="state">code</field>
 			<field name="code">model.search([])._check_missed_mails()</field>
 			<field name="nextcall" eval="'2000-01-01 20:15:00'" />

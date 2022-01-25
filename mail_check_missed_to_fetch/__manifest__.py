@@ -7,7 +7,7 @@
                 'views/missing_entry_tree.xml',
                 'views/missing_search.xml'],
     'demo': [],
-    'depends': ['mail'],
+    'depends': ['mail', 'fetchmail'],
     'external_dependencies': {'bin': [], 'python': []},
     'name': 'mail_check_missed_to_fetch',
     'qweb': [],
