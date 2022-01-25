@@ -8,6 +8,19 @@ class MissingEntry(models.Model):
     missing_ok = fields.Boolean("Missing OK")
     mail_message_id = fields.Char("Message-ID", index=True)
 
+    @api.model
+    def make_entry(self, parsed_message):
+        message_id = parsed_message['message-id'].strip()
+        self.env.cr.execute("select count(*) from mail_message where message_id=%s", (message_id,))
+        missing = self.env.cr.fetchone()[0]
+        existing = self.sudo().search([('mail_message_id', '=', message_id)])
+        if missing and not existing:
+            self.create({
+                'mail_message_id': message_id,
+            })
+        elif not missing and existing:
+            existing.unlink()
+
     _sql_constraints = [
         ('mail_message_id_unique', "unique(mail_message_id)", _("Only one unique entry allowed.")),
     ]
