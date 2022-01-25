@@ -1,0 +1,12 @@
+<odoo>
+	<data>
+        <!--
+		<template id="assets_backend" name="mail_check_missed_to_fetch assets" inherit_id="web.assets_backend">
+			<xpath expr="." position="inside">
+				<script type="text/javascript" src="/mail_check_missed_to_fetch/static/src/js/mail_check_missed_to_fetch.js"></script>
+                <link rel="stylesheet" href="/mail_check_missed_to_fetch/static/src/css/mail_check_missed_to_fetch.css"/>
+			</xpath>
+		</template>
+        -->
+	</data>
+</odoo>
