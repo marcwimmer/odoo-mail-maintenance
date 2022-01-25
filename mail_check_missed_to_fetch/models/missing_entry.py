@@ -1,5 +1,7 @@
 from odoo import _, api, fields, models, SUPERUSER_ID
+from datetime import datetime
 from odoo.exceptions import UserError, RedirectWarning, ValidationError
+
 class MissingEntry(models.Model):
     _name = 'mail.missed.fetch'
 
@@ -14,9 +16,15 @@ class MissingEntry(models.Model):
         self.env.cr.execute("select count(*) from mail_message where message_id=%s", (message_id,))
         missing = self.env.cr.fetchone()[0]
         existing = self.sudo().search([('mail_message_id', '=', message_id)])
+        try:
+            date = datetime.strptime(parsed_message['Date'], "%a, %d %b %Y %H:%M:%S %z")
+        except:
+            date = False
         if missing and not existing:
             self.create({
                 'mail_message_id': message_id,
+                'date': date,
+                'subject': parsed_message['Subject'],
             })
         elif not missing and existing:
             existing.unlink()
