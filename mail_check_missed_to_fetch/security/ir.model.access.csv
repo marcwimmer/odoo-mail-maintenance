@@ -1,0 +1,2 @@
+model_id:id,group_id:id,id,name,perm_read,perm_write,perm_create,perm_unlink
+model_mail_missed_fetch,base.group_system,access_mail_missing_entry_base_group_admin,mail.missing.entry_base_group_admin,1,1,1,1

@@ -7,3 +7,7 @@ class MissingEntry(models.Model):
     date = fields.Date("Sent")
     missing_ok = fields.Boolean("Missing OK")
     mail_message_id = fields.Char("Message-ID", index=True)
+
+    _sql_constraints = [
+        ('mail_message_id_unique', "unique(mail_message_id)", _("Only one unique entry allowed.")),
+    ]
