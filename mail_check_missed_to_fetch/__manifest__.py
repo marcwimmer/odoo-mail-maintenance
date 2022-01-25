@@ -1,12 +1,15 @@
-
-{
-    'name': 'mail_check_missed_to_fetch',
-    'version': '13.0.1.0',
+{   'application': False,
     'author': 'Marc Wimmer (marc@itewimmer.de)',
-    'depends': [,
-    'data': [],
-    "external_dependencies": {"python": [], "bin": []},
-    #"uninstall_hook": "uninstall_hook",
-    #'pre_init_hook': 'pre_init_hook',
-    #'post_init_hook': 'post_init_hook',
-}
+    'css': [],
+    'data': [   'data/cronjobs.xml',
+                'views/fetchmail_server_form.xml',
+                'views/missing_entry_form.xml',
+                'views/missing_entry_tree.xml',
+                'views/missing_search.xml'],
+    'demo': [],
+    'depends': ['mail'],
+    'external_dependencies': {'bin': [], 'python': []},
+    'name': 'mail_check_missed_to_fetch',
+    'qweb': [],
+    'test': [],
+    'version': '13.0.1.0'}
