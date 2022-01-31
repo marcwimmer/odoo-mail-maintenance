@@ -14,19 +14,19 @@ class MissingEntry(models.Model):
     def make_entry(self, parsed_message):
         message_id = parsed_message['message-id'].strip()
         self.env.cr.execute("select count(*) from mail_message where message_id=%s", (message_id,))
-        missing = self.env.cr.fetchone()[0]
+        not_missing = self.env.cr.fetchone()[0]
         existing = self.sudo().search([('mail_message_id', '=', message_id)])
         try:
             date = datetime.strptime(parsed_message['Date'], "%a, %d %b %Y %H:%M:%S %z")
         except:
             date = False
-        if missing and not existing:
+        if not not_missing and not existing:
             self.create({
                 'mail_message_id': message_id,
                 'date': date,
                 'subject': parsed_message['Subject'],
             })
-        elif not missing and existing:
+        elif not_missing and existing:
             existing.unlink()
 
     _sql_constraints = [
