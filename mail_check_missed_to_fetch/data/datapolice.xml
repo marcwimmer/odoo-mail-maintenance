@@ -5,6 +5,7 @@
 			<field name="model">mail.missed.fetch</field>
 			<field name="name">Word copy in translation</field>
 			<field name="domain">[('missing_ok', '=', False)]</field>
+			<field name="expr">obj.missing_ok</field>
 		</record>
 
 	</data>
