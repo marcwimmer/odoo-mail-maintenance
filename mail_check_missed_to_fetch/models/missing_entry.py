@@ -4,6 +4,7 @@ from odoo.exceptions import UserError, RedirectWarning, ValidationError
 
 class MissingEntry(models.Model):
     _name = 'mail.missed.fetch'
+    _order = 'date desc'
 
     subject = fields.Char("Subject")
     date = fields.Date("Sent")
