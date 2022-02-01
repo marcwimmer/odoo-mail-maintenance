@@ -1,0 +1,11 @@
+<odoo>
+	<data noupdate='0'>
+
+		<record model="data.police" id="word_copy_in_translation">
+			<field name="model">mail.missed.fetch</field>
+			<field name="name">Word copy in translation</field>
+			<field name="domain">[('missing_ok', '=', False)]</field>
+		</record>
+
+	</data>
+</odoo>
