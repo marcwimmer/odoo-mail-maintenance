@@ -6,7 +6,7 @@ class MissingEntry(models.Model):
     _name = 'mail.missed.fetch'
 
     subject = fields.Char("Subject")
-    date = fields.Date("Sent")
+    datetime = fields.Date("Sent")
     missing_ok = fields.Boolean("Missing OK")
     mail_message_id = fields.Char("Message-ID", index=True)
 
