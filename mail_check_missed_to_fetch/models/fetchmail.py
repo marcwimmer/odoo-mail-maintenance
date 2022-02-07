@@ -7,7 +7,7 @@ class MissingEntry(models.Model):
 
     check_missing_days = fields.Integer("Check Missing for days", default=14)
 
-    def _checked_for_missed_mails(self):
+    def _check_missed_mails(self):
         for server in self:
             _logger.info('start checking for new emails on %s server %s', server.server_type, server.name)
             imap_server = None
