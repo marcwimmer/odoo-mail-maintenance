@@ -22,7 +22,7 @@ class MissingEntry(models.Model):
             date = datetime.strptime(parsed_message['Date'], "%a, %d %b %Y %H:%M:%S %z")
         except:
             date = False
-        if not existing_mm not existing_entries:
+        if not existing_mm and not existing_entries:
             self.create({
                 'mail_message_id': message_id,
                 'date': date,
