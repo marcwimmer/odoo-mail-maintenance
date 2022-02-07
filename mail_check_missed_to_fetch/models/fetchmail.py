@@ -10,26 +10,6 @@ class MissingEntry(models.Model):
     missing_ok = fields.Boolean("Missing OK")
     mail_message_id = fields.Char("Message-ID", index=True)
 
-    @api.model
-    def make_entry(self, parsed_message):
-        message_id = parsed_message['message-id'].strip()
-        self.env.cr.execute("select count(*) from mail_message where message_id=%s", (message_id,))
-        not_missing = self.env.cr.fetchone()[0]
-        existing = self.sudo().search([('mail_message_id', '=', message_id)])
-        try:
-            date = datetime.strptime(parsed_message['Date'], "%a, %d %b %Y %H:%M:%S %z")
-        except:
-            date = False
-        if not not_missing and not existing:
-            self.create({
-                'mail_message_id': message_id,
-                'date': date,
-                'subject': parsed_message['Subject'],
-            })
-        elif not_missing and existing:
-            existing.unlink()
-
-<<<<<<< HEAD
     def _checked_for_missed_mails(self):
         for server in self:
             _logger.info('start checking for new emails on %s server %s', server.server_type, server.name)
