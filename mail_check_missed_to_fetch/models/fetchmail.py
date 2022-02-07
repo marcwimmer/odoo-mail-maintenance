@@ -3,7 +3,7 @@ from datetime import datetime
 from odoo.exceptions import UserError, RedirectWarning, ValidationError
 
 class MissingEntry(models.Model):
-    _name = 'fetchmail.server'
+    _inherit = 'fetchmail.server'
 
     check_missing_days = fields.Integer("Check Missing for days", default=14)
 
