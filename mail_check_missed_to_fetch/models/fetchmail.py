@@ -38,8 +38,7 @@ class MissingEntry(models.Model):
             elif server.server_type == 'pop':
                 raise NotImplementedError("POP")
         return True
-=======
+
     _sql_constraints = [
         ('mail_message_id_unique', "unique(mail_message_id)", _("Only one unique entry allowed.")),
     ]
->>>>>>> 00e672d463735f2e04fcf4bbfdbe02bbe30ae063
