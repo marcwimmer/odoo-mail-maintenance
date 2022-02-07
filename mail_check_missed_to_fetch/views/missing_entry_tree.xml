@@ -8,6 +8,7 @@
 					<field name="subject" />
 					<field name="date" />
 					<field name="missing_ok" />
+					<field name="fetchmail_server_id"/>
 				</tree>
 			</field>
 		</record>

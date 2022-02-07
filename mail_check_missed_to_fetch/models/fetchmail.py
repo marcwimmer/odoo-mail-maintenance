@@ -34,7 +34,7 @@ class FetchMailServer(models.Model):
                         if result != 'OK':
                             raise Exception("Error fetching imap mail: " + result)
                         mm = email.message_from_string(data[0][1].decode('utf-8'))
-                        self.env['mail.missed.fetch'].make_entry(mm)
+                        self.env['mail.missed.fetch'].make_entry(server, mm)
                 except Exception:
                     _logger.info("General failure when trying to fetch mail from %s server %s.", server.server_type, server.name, exc_info=True)
                 finally:
