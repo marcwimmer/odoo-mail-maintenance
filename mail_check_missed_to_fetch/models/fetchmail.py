@@ -5,10 +5,7 @@ from odoo.exceptions import UserError, RedirectWarning, ValidationError
 class MissingEntry(models.Model):
     _name = 'mail.missed.fetch'
 
-    subject = fields.Char("Subject")
-    datetime = fields.Datetime("Sent")
-    missing_ok = fields.Boolean("Missing OK")
-    mail_message_id = fields.Char("Message-ID", index=True)
+    check_missing_days = fields.Integer("Check Missing for days", default=14)
 
     def _checked_for_missed_mails(self):
         for server in self:
