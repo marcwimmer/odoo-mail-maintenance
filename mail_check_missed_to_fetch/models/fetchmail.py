@@ -1,20 +1,14 @@
-import arrow
-import re
 from odoo import _, api, fields, models, SUPERUSER_ID
+from datetime import datetime
 from odoo.exceptions import UserError, RedirectWarning, ValidationError
-from email.utils import formatdate
-import email
-import logging
-_logger = logging.getLogger()
 
-class FetchMailServer(models.Model):
-    _inherit = 'fetchmail.server'
+class MissingEntry(models.Model):
+    _name = 'mail.missed.fetch'
 
-    check_missing_days = fields.Integer("Check Missing for days", default=14)
-
-    def _check_missed_mails(self):
-        for rec in self:
-            rec._checked_for_missed_mails()
+    subject = fields.Char("Subject")
+    datetime = fields.Datetime("Sent")
+    missing_ok = fields.Boolean("Missing OK")
+    mail_message_id = fields.Char("Message-ID", index=True)
 
     def _checked_for_missed_mails(self):
         for server in self:
@@ -34,7 +28,7 @@ class FetchMailServer(models.Model):
                         if result != 'OK':
                             raise Exception("Error fetching imap mail: " + result)
                         mm = email.message_from_string(data[0][1].decode('utf-8'))
-                        self.env['mail.missed.fetch'].make_entry(mm)
+                        self.env['mail.missed.fetch'].make_entry(server, mm)
                 except Exception:
                     _logger.info("General failure when trying to fetch mail from %s server %s.", server.server_type, server.name, exc_info=True)
                 finally:
@@ -44,3 +38,8 @@ class FetchMailServer(models.Model):
             elif server.server_type == 'pop':
                 raise NotImplementedError("POP")
         return True
+=======
+    _sql_constraints = [
+        ('mail_message_id_unique', "unique(mail_message_id)", _("Only one unique entry allowed.")),
+    ]
+>>>>>>> 00e672d463735f2e04fcf4bbfdbe02bbe30ae063

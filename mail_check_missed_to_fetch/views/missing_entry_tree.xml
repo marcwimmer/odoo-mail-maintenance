@@ -3,11 +3,12 @@
 		<record id="view_mail_missed_fetch_tree" model="ir.ui.view">
 			<field name="model">mail.missed.fetch</field>
 			<field name="arch" type="xml">
-				<tree default_order="" string="" >
+				<tree default_order="" string="" multi_edit="1" >
 					<field name="mail_message_id"/>
 					<field name="subject" />
 					<field name="date" />
 					<field name="missing_ok" />
+					<field name="fetchmail_server_id"/>
 				</tree>
 			</field>
 		</record>

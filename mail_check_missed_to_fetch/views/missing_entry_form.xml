@@ -9,6 +9,8 @@
 					<header></header>
 					<sheet>
 						<group string="" col="2">
+							<field name="fetchmail_server_id"/>
+							<field name="mail_message_id"/>
 							<field name="missing_ok"/>
 							<field name="subject" />
 							<field name="date" />
