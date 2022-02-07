@@ -13,7 +13,7 @@ class MissingEntry(models.Model):
     fetchmail_server_id = fields.Many2one("fetchmail.server", string="Fetchmail")
 
     @api.model
-    def make_entry(self, server.id, parsed_message):
+    def make_entry(self, server, parsed_message):
         message_id = parsed_message['message-id'].strip()
         self.env.cr.execute("select count(*) from mail_message where message_id=%s", (message_id,))
         existing_mm = self.env.cr.fetchone()[0]
