@@ -13,23 +13,24 @@ class MissingEntry(models.Model):
     fetchmail_server_id = fields.Many2one("fetchmail.server", string="Fetchmail")
 
     @api.model
-    def make_entry(self, parsed_message):
+    def make_entry(self, server.id, parsed_message):
         message_id = parsed_message['message-id'].strip()
         self.env.cr.execute("select count(*) from mail_message where message_id=%s", (message_id,))
-        not_missing = self.env.cr.fetchone()[0]
-        existing = self.sudo().search([('mail_message_id', '=', message_id)])
+        existing_mm = self.env.cr.fetchone()[0]
+        existing_entries = self.sudo().search([('mail_message_id', '=', message_id)])
         try:
             date = datetime.strptime(parsed_message['Date'], "%a, %d %b %Y %H:%M:%S %z")
         except:
             date = False
-        if not not_missing and not existing:
+        if not existing_mm not existing_entries:
             self.create({
                 'mail_message_id': message_id,
                 'date': date,
                 'subject': parsed_message['Subject'],
+                'fetchmail_server_id': server.id
             })
-        elif not_missing and existing:
-            existing.unlink()
+        elif existing_mm and existing_entries:
+            existing_entries.unlink()
 
     _sql_constraints = [
         ('mail_message_id_unique', "unique(mail_message_id)", _("Only one unique entry allowed.")),
