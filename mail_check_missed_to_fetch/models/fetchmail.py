@@ -2,6 +2,7 @@ from odoo import _, api, fields, models, SUPERUSER_ID
 from datetime import datetime
 from odoo.exceptions import UserError, RedirectWarning, ValidationError
 import logging
+import arrow
 _logger = logging.getLogger(__name__)
 
 class MissingEntry(models.Model):
